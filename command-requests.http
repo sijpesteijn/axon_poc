@@ -5,21 +5,22 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "bankTransactionId": "532588e7-2c23-4c09-afb6-d05cecc64707",
+  "bankTransactionId": "532588e7-2c23-4c09-afb6-d05cecc64708",
   "fromAccount": "NL50ABNA0705262425",
   "fromAccountHolder": "Jan Jansen",
   "toAccount": "NL50ABNA01245939",
-  "toAccountHolder": "Pietje Puk"
+  "toAccountHolder": "Pietje Puk",
+  "currency": "EUR"
 }
 ###
 
-POST localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64707/NEW
+POST localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64708/NEW
 Accept: application/json
 Content-Type: application/json
 
 ###
 
-POST localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64707/PARSED
+POST localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64708/PARSED
 Accept: application/json
 Content-Type: application/json
 

@@ -26,7 +26,8 @@ public class BankTransactionsProjection {
     public void on(BankTransactionCreatedEvent event) {
         bankTransactionRepository.save(new BankTransactionEntity(event.getBankTransactionId(),
                 event.getBankTransaction().getToAccount(), event.getBankTransaction().getToAccountHolder(),
-                event.getBankTransaction().getFromAccount(), event.getBankTransaction().getFromAccountHolder()));
+                event.getBankTransaction().getFromAccount(), event.getBankTransaction().getFromAccountHolder(),
+                event.getBankTransaction().getCurrency()));
     }
 
     @EventHandler

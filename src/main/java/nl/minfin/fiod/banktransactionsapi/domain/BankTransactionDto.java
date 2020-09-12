@@ -6,6 +6,7 @@ public class BankTransactionDto {
     private String fromAccountHolder;
     private String toAccount;
     private String toAccountHolder;
+    private String currency;
 
     public BankTransactionDto() {
     }
@@ -50,4 +51,11 @@ public class BankTransactionDto {
         this.toAccountHolder = toAccountHolder;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 }

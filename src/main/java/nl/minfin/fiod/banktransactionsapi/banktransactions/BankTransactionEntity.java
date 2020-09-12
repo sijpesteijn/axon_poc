@@ -13,18 +13,20 @@ public class BankTransactionEntity {
     private String toAccountHolder;
     private String fromAccount;
     private String fromAccountHolder;
+    private String currency;
     private ParseStatus parseStatus;
 
     public BankTransactionEntity() {
     }
 
     public BankTransactionEntity(String bankTransactionId, String toAccount, String toAccountHolder, String fromAccount,
-                                 String fromAccountHolder) {
+                                 String fromAccountHolder, String currency) {
         this.bankTransactionId = bankTransactionId;
         this.toAccount = toAccount;
         this.toAccountHolder = toAccountHolder;
         this.fromAccount = fromAccount;
         this.fromAccountHolder = fromAccountHolder;
+        this.currency = currency;
     }
 
     public void setParseStatus(ParseStatus parseStatus) {
@@ -73,5 +75,13 @@ public class BankTransactionEntity {
 
     public ParseStatus getParseStatus() {
         return parseStatus;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }
