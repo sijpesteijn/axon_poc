@@ -1,0 +1,26 @@
+### BankTransaction Creation ###
+
+POST localhost:8080/banktransactions
+Accept: application/json
+Content-Type: application/json
+
+{
+  "bankTransactionId": "532588e7-2c23-4c09-afb6-d05cecc64707",
+  "fromAccount": "NL50ABNA0705262425",
+  "fromAccountHolder": "Jan Jansen",
+  "toAccount": "NL50ABNA01245939",
+  "toAccountHolder": "Pietje Puk"
+}
+###
+
+POST localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64707/NEW
+Accept: application/json
+Content-Type: application/json
+
+###
+
+POST localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64707/PARSED
+Accept: application/json
+Content-Type: application/json
+
+###

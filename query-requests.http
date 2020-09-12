@@ -1,0 +1,6 @@
+### Retrieve all bank transactions present
+
+GET localhost:8080/banktransactions
+Accept: application/json
+
+###
