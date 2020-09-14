@@ -3,4 +3,12 @@
 GET localhost:8080/banktransactions
 Accept: application/json
 
-###
+### Subscribe to all banktransactions
+
+GET localhost:8080/banktransactions/subscribe
+Accept: text/event-stream
+
+### Read banktransaction events
+
+GET localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64708/events
+Accept: application/json

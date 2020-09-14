@@ -20,13 +20,14 @@ public class BankTransactionEntity {
     }
 
     public BankTransactionEntity(String bankTransactionId, String toAccount, String toAccountHolder, String fromAccount,
-                                 String fromAccountHolder, String currency) {
+                                 String fromAccountHolder, String currency, ParseStatus parseStatus) {
         this.bankTransactionId = bankTransactionId;
         this.toAccount = toAccount;
         this.toAccountHolder = toAccountHolder;
         this.fromAccount = fromAccount;
         this.fromAccountHolder = fromAccountHolder;
         this.currency = currency;
+        this.parseStatus = parseStatus;
     }
 
     public void setParseStatus(ParseStatus parseStatus) {

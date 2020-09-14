@@ -14,6 +14,14 @@ Content-Type: application/json
 }
 ###
 
+### BankTransaction Creation ###
+
+POST localhost:8080/banktransactions/random
+Accept: application/json
+Content-Type: application/json
+
+###
+
 POST localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64708/NEW
 Accept: application/json
 Content-Type: application/json

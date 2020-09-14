@@ -1,0 +1,13 @@
+### Start replay
+
+POST localhost:8080/replay
+Accept: application/json
+
+###
+
+### Retrieve replay progress
+
+GET localhost:8080/replay
+Accept: application/json
+
+###
