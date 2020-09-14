@@ -19,7 +19,7 @@ public class CurrencyEventUpCaster extends SingleEventUpcaster {
                 new SimpleSerializedType(targetType.getName(), "2.0"),
                 org.dom4j.Document.class,
                 document -> {
-                    document.getRootElement()
+                    document.getRootElement().elements().get(1)
                             .addElement("currency")
                             .setText("DOLLAR"); // Default value
                     return document;

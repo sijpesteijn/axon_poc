@@ -5,6 +5,7 @@ import nl.minfin.fiod.banktransactionsapi.domain.BankTransactionCreatedEvent;
 import nl.minfin.fiod.banktransactionsapi.domain.UpdateBankTransactionParseStatusCommand;
 import nl.minfin.fiod.banktransactionsapi.domain.UpdateBankTransactionParseStatusEvent;
 import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.eventhandling.ReplayStatus;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,8 @@ public class BankTransactionsProjection {
     }
 
     @EventHandler
-    public void on(BankTransactionCreatedEvent event) {
+    public void on(BankTransactionCreatedEvent event, ReplayStatus replayStatus) {
+        System.out.println("Replay status: " + replayStatus.isReplay());
         bankTransactionRepository.save(new BankTransactionEntity(event.getBankTransactionId(),
                 event.getBankTransaction().getToAccount(), event.getBankTransaction().getToAccountHolder(),
                 event.getBankTransaction().getFromAccount(), event.getBankTransaction().getFromAccountHolder(),
