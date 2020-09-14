@@ -1,7 +1,10 @@
 package nl.minfin.fiod.banktransactionsapi.banktransactions;
 
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.time.Instant;
 
@@ -15,12 +18,16 @@ public class BankTransactionEntity {
     private String fromAccountHolder;
     private String currency;
     private ParseStatus parseStatus;
+    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
+    private Instant createDate;
+    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
+    private Instant lastUpdateDate;
 
     public BankTransactionEntity() {
     }
 
     public BankTransactionEntity(String bankTransactionId, String toAccount, String toAccountHolder, String fromAccount,
-                                 String fromAccountHolder, String currency, ParseStatus parseStatus) {
+                                 String fromAccountHolder, String currency, ParseStatus parseStatus, Instant createDate, Instant lastUpdateDate) {
         this.bankTransactionId = bankTransactionId;
         this.toAccount = toAccount;
         this.toAccountHolder = toAccountHolder;
@@ -28,6 +35,8 @@ public class BankTransactionEntity {
         this.fromAccountHolder = fromAccountHolder;
         this.currency = currency;
         this.parseStatus = parseStatus;
+        this.createDate = createDate;
+        this.lastUpdateDate = lastUpdateDate;
     }
 
     public void setParseStatus(ParseStatus parseStatus) {
@@ -84,5 +93,21 @@ public class BankTransactionEntity {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public void setCreateDate(Instant createDate) {
+        this.createDate = createDate;
+    }
+
+    public Instant getCreateDate() {
+        return createDate;
+    }
+
+    public void setLastUpdateDate(Instant lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
+    }
+
+    public Instant getLastUpdateDate() {
+        return lastUpdateDate;
     }
 }

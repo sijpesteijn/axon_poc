@@ -2,6 +2,7 @@ package nl.minfin.fiod.banktransactionsapi.controllers;
 
 import nl.minfin.fiod.banktransactionsapi.domain.AllBankTransactionsQuery;
 import nl.minfin.fiod.banktransactionsapi.banktransactions.BankTransactionEntity;
+import nl.minfin.fiod.banktransactionsapi.domain.AuditEvent;
 import org.axonframework.eventsourcing.eventstore.EventStore;
 import org.axonframework.messaging.Message;
 import org.axonframework.messaging.responsetypes.MultipleInstancesResponseType;
@@ -56,7 +57,7 @@ public class QueryController {
         return this.eventStore
                 .readEvents(banktransactionId)
                 .asStream()
-                .map(Message::getPayload)
+                .map(message -> new AuditEvent(message.getTimestamp(), message.getPayload()))
                 .collect(Collectors.toList());
     }
 }
