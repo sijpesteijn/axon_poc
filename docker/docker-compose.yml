@@ -1,0 +1,75 @@
+version: '2'
+
+services:
+
+  axonserver:
+    image: axoniq/axonserver
+    hostname: axonserver
+    volumes:
+      - axonserver-data:/data
+      - axonserver-events:/eventdata
+      - axonserver-config:/config:ro
+    ports:
+      - "8024:8024"
+      - "8124:8124"
+      - "8224:8224"
+    networks:
+      - axon-poc
+
+  elasticsearch:
+    build:
+      context: elasticsearch/
+      args:
+        ES_VERSION: 7.9.1
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: changeme
+    networks:
+      - axon-poc
+
+  # kibana:
+  #   build:
+  #     context: kibana/
+  #     args:
+  #       ES_VERSION: 7.9.1
+  #   volumes:
+  #     - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
+  #   ports:
+  #     - "5601:5601"
+  #   networks:
+  #     - axon-poc
+  #   depends_on:
+  #     - elasticsearch
+
+volumes:
+  axonserver-data:
+  axonserver-events:
+  axonserver-config:
+
+volumes:
+  axonserver-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/axon-server/data
+      o: bind
+  axonserver-events:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/axon-server/events
+      o: bind
+  axonserver-config:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/axon-server/config
+      o: bind
+networks:
+  axon-poc:
+    driver: bridge
