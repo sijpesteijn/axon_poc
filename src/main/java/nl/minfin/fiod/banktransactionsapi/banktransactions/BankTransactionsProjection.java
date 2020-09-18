@@ -36,11 +36,9 @@ public class BankTransactionsProjection {
 
     @EventHandler
     public void on(BankTransactionCreatedEvent event, ReplayStatus replayStatus, @Timestamp Instant timestamp) {
-        System.out.println("Replay status: " + replayStatus.isReplay());
         BankTransactionEntity bankTransactionEntity = new BankTransactionEntity(event.getBankTransactionId(),
                 event.getBankTransaction().getToAccount(), event.getBankTransaction().getToAccountHolder(),
-                event.getBankTransaction().getFromAccount(), event.getBankTransaction().getFromAccountHolder(),
-                event.getBankTransaction().getCurrency(), ParseStatus.NEW, timestamp, timestamp);
+                event.getBankTransaction().getFromAccount(), event.getBankTransaction().getFromAccountHolder(), ParseStatus.NEW, timestamp, timestamp);
         bankTransactionRepository.save(bankTransactionEntity);
         this.updateEmitter.emit(BankTransactionQuery.class, query -> query.getBankTransactionId().equals(bankTransactionEntity.getBankTransactionId()), bankTransactionEntity);
         this.updateEmitter.emit(AllBankTransactionsQuery.class, query -> true, bankTransactionEntity);

@@ -1,10 +1,8 @@
 package nl.minfin.fiod.banktransactionsapi.controllers;
 
-import nl.minfin.fiod.banktransactionsapi.domain.AllBankTransactionsQuery;
 import nl.minfin.fiod.banktransactionsapi.banktransactions.BankTransactionEntity;
-import nl.minfin.fiod.banktransactionsapi.domain.AuditEvent;
+import nl.minfin.fiod.banktransactionsapi.domain.AllBankTransactionsQuery;
 import nl.minfin.fiod.banktransactionsapi.domain.BankTransactionQuery;
-import org.axonframework.eventsourcing.eventstore.EventStore;
 import org.axonframework.messaging.responsetypes.MultipleInstancesResponseType;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
@@ -14,9 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+
 import java.util.List;
 import java.util.concurrent.Future;
-import java.util.stream.Collectors;
 
 import static org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf;
 import static org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf;
@@ -25,11 +23,9 @@ import static org.axonframework.messaging.responsetypes.ResponseTypes.multipleIn
 public class QueryController {
 
     private final QueryGateway queryGateway;
-    private EventStore eventStore;
 
-    public QueryController(QueryGateway queryGateway, EventStore eventStore) {
+    public QueryController(QueryGateway queryGateway) {
         this.queryGateway = queryGateway;
-        this.eventStore = eventStore;
     }
 
     @GetMapping("banktransactions")
@@ -46,15 +42,6 @@ public class QueryController {
         );
         Flux<BankTransactionEntity> initialResult = result.initialResult().flatMapMany(Flux::fromIterable);
         return Flux.concat(initialResult, result.updates());
-    }
-
-    @GetMapping("/banktransactions/{banktransactionId}/events")
-    public List<Object> listEventsForAccount(@PathVariable(value = "banktransactionId") String banktransactionId) {
-        return this.eventStore
-                .readEvents(banktransactionId)
-                .asStream()
-                .map(message -> new AuditEvent(message.getTimestamp(), message.getPayload()))
-                .collect(Collectors.toList());
     }
 
     @GetMapping("/banktransactions/{banktransactionId}")

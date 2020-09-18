@@ -9,8 +9,7 @@ Content-Type: application/json
   "fromAccount": "NL50ABNA0705262425",
   "fromAccountHolder": "Jan Jansen",
   "toAccount": "NL50ABNA01245939",
-  "toAccountHolder": "Pietje Puk",
-  "currency": "EUR"
+  "toAccountHolder": "Pietje Puk"
 }
 ###
 
@@ -22,13 +21,13 @@ Content-Type: application/json
 
 ###
 
-POST localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64708/NEW
+POST localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64708/PARSED
 Accept: application/json
 Content-Type: application/json
 
 ###
 
-POST localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64708/PARSED
+POST localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64708/FAILED
 Accept: application/json
 Content-Type: application/json
 

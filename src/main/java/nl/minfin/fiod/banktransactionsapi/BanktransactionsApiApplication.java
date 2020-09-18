@@ -1,12 +1,5 @@
 package nl.minfin.fiod.banktransactionsapi;
 
-import nl.minfin.fiod.banktransactionsapi.upcasters.CurrencyEventUpCaster;
-import org.axonframework.common.jpa.EntityManagerProvider;
-import org.axonframework.common.transaction.TransactionManager;
-import org.axonframework.eventsourcing.eventstore.inmemory.InMemoryEventStorageEngine;
-import org.axonframework.eventsourcing.eventstore.jpa.JpaEventStorageEngine;
-import org.axonframework.serialization.Serializer;
-import org.axonframework.serialization.upcasting.event.SingleEventUpcaster;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,9 +15,6 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import javax.sql.DataSource;
-import java.sql.SQLException;
 
 @EnableElasticsearchRepositories(basePackages = "nl.minfin.fiod.banktransactionsapi")
 @SpringBootApplication
@@ -62,27 +52,5 @@ public class BanktransactionsApiApplication {
                     .build();
         }
     }
-
-    @Bean
-    public SingleEventUpcaster currencyEventUpCaster() {
-        return new CurrencyEventUpCaster();
-    }
-//
-//    @Bean
-//    public InMemoryEventStorageEngine eventStorageEngine(Serializer eventSerializer,
-//                                                         Serializer snapshotSerializer,
-//                                                         DataSource dataSource,
-//                                                         SingleEventUpcaster currencyEventUpCaster,
-//                                                         EntityManagerProvider entityManagerProvider,
-//                                                         TransactionManager transactionManager) throws SQLException {
-//        return InMemoryEventStorageEngine.builder()
-//                .eventSerializer(eventSerializer)
-//                .snapshotSerializer(snapshotSerializer)
-//                .dataSource(dataSource)
-//                .entityManagerProvider(entityManagerProvider)
-//                .transactionManager(transactionManager)
-//                .upcasterChain(currencyEventUpCaster)
-//                .build();
-//    }
 
 }

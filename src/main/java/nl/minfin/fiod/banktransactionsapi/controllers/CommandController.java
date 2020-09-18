@@ -36,7 +36,6 @@ public class CommandController {
         bankTransaction.setFromAccountHolder(faker.lebowski().character());
         bankTransaction.setToAccount(faker.finance().iban());
         bankTransaction.setToAccountHolder(faker.lebowski().character());
-        bankTransaction.setCurrency(faker.currency().code());
         return commandGateway.send(new CreateBankTransactionCommand(bankTransactionId, bankTransaction));
     }
 

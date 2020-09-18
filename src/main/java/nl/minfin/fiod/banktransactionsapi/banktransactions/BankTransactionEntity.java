@@ -11,12 +11,17 @@ import java.time.Instant;
 @Document(indexName = "banktransactions")
 public class BankTransactionEntity {
     @Id
+    @Field(type = FieldType.Text)
     private String bankTransactionId;
+    @Field(type = FieldType.Text)
     private String toAccount;
+    @Field(type = FieldType.Text)
     private String toAccountHolder;
+    @Field(type = FieldType.Text)
     private String fromAccount;
+    @Field(type = FieldType.Text)
     private String fromAccountHolder;
-    private String currency;
+    @Field(type = FieldType.Text)
     private ParseStatus parseStatus;
     @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
     private Instant createDate;
@@ -27,13 +32,12 @@ public class BankTransactionEntity {
     }
 
     public BankTransactionEntity(String bankTransactionId, String toAccount, String toAccountHolder, String fromAccount,
-                                 String fromAccountHolder, String currency, ParseStatus parseStatus, Instant createDate, Instant lastUpdateDate) {
+                                 String fromAccountHolder, ParseStatus parseStatus, Instant createDate, Instant lastUpdateDate) {
         this.bankTransactionId = bankTransactionId;
         this.toAccount = toAccount;
         this.toAccountHolder = toAccountHolder;
         this.fromAccount = fromAccount;
         this.fromAccountHolder = fromAccountHolder;
-        this.currency = currency;
         this.parseStatus = parseStatus;
         this.createDate = createDate;
         this.lastUpdateDate = lastUpdateDate;
@@ -85,14 +89,6 @@ public class BankTransactionEntity {
 
     public ParseStatus getParseStatus() {
         return parseStatus;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
     }
 
     public void setCreateDate(Instant createDate) {
