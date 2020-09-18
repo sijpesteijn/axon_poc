@@ -8,7 +8,17 @@ Accept: application/json
 GET localhost:8080/banktransactions/subscribe
 Accept: text/event-stream
 
+### Read banktransaction
+
+GET localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64708
+Accept: application/json
+
 ### Read banktransaction events
 
 GET localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64708/events
 Accept: application/json
+
+### Subscribe to banktransaction events
+
+GET localhost:8080/banktransactions/532588e7-2c23-4c09-afb6-d05cecc64708/events/subscribe
+Accept: text/event-stream

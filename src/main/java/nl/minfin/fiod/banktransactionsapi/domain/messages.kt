@@ -14,3 +14,4 @@ data class UpdateBankTransactionParseStatusCommand(@TargetAggregateIdentifier va
 data class BankTransactionCreatedEvent(val bankTransactionId: String, val bankTransaction: BankTransactionDto)
 data class UpdateBankTransactionParseStatusEvent(val bankTransactionId: String, val parseStatus: ParseStatus)
 class AllBankTransactionsQuery
+data class BankTransactionQuery(val bankTransactionId: String)

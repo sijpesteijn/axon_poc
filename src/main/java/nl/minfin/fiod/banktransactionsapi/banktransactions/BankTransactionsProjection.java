@@ -2,6 +2,7 @@ package nl.minfin.fiod.banktransactionsapi.banktransactions;
 
 import nl.minfin.fiod.banktransactionsapi.domain.AllBankTransactionsQuery;
 import nl.minfin.fiod.banktransactionsapi.domain.BankTransactionCreatedEvent;
+import nl.minfin.fiod.banktransactionsapi.domain.BankTransactionQuery;
 import nl.minfin.fiod.banktransactionsapi.domain.UpdateBankTransactionParseStatusEvent;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.eventhandling.ReplayStatus;
@@ -28,6 +29,11 @@ public class BankTransactionsProjection {
         return bankTransactionRepository.findAll();
     }
 
+    @QueryHandler
+    public BankTransactionEntity handle(BankTransactionQuery query) {
+        return bankTransactionRepository.findById(query.getBankTransactionId()).orElse(null);
+    }
+
     @EventHandler
     public void on(BankTransactionCreatedEvent event, ReplayStatus replayStatus, @Timestamp Instant timestamp) {
         System.out.println("Replay status: " + replayStatus.isReplay());
@@ -36,6 +42,7 @@ public class BankTransactionsProjection {
                 event.getBankTransaction().getFromAccount(), event.getBankTransaction().getFromAccountHolder(),
                 event.getBankTransaction().getCurrency(), ParseStatus.NEW, timestamp, timestamp);
         bankTransactionRepository.save(bankTransactionEntity);
+        this.updateEmitter.emit(BankTransactionQuery.class, query -> query.getBankTransactionId().equals(bankTransactionEntity.getBankTransactionId()), bankTransactionEntity);
         this.updateEmitter.emit(AllBankTransactionsQuery.class, query -> true, bankTransactionEntity);
     }
 
@@ -46,6 +53,7 @@ public class BankTransactionsProjection {
                             bankTransactionEntity.setParseStatus(event.getParseStatus());
                             bankTransactionEntity.setLastUpdateDate(timestamp);
                             bankTransactionRepository.save(bankTransactionEntity);
+                            this.updateEmitter.emit(BankTransactionQuery.class, query -> query.getBankTransactionId().equals(bankTransactionEntity.getBankTransactionId()), bankTransactionEntity);
                             this.updateEmitter.emit(AllBankTransactionsQuery.class, query -> true, bankTransactionEntity);
                         },
                         () -> {
