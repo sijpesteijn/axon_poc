@@ -11,12 +11,19 @@ import java.time.Instant;
 @Document(indexName = "banktransactions")
 public class BankTransactionEntity {
     @Id
+    @Field(type = FieldType.Text)
     private String bankTransactionId;
+    @Field(type = FieldType.Text)
     private String toAccount;
+    @Field(type = FieldType.Text)
     private String toAccountHolder;
+    @Field(type = FieldType.Text)
     private String fromAccount;
+    @Field(type = FieldType.Text)
     private String fromAccountHolder;
+    @Field(type = FieldType.Text)
     private String currency;
+    @Field(type = FieldType.Text)
     private ParseStatus parseStatus;
     @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
     private Instant createDate;

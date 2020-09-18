@@ -67,22 +67,4 @@ public class BanktransactionsApiApplication {
     public SingleEventUpcaster currencyEventUpCaster() {
         return new CurrencyEventUpCaster();
     }
-//
-//    @Bean
-//    public InMemoryEventStorageEngine eventStorageEngine(Serializer eventSerializer,
-//                                                         Serializer snapshotSerializer,
-//                                                         DataSource dataSource,
-//                                                         SingleEventUpcaster currencyEventUpCaster,
-//                                                         EntityManagerProvider entityManagerProvider,
-//                                                         TransactionManager transactionManager) throws SQLException {
-//        return InMemoryEventStorageEngine.builder()
-//                .eventSerializer(eventSerializer)
-//                .snapshotSerializer(snapshotSerializer)
-//                .dataSource(dataSource)
-//                .entityManagerProvider(entityManagerProvider)
-//                .transactionManager(transactionManager)
-//                .upcasterChain(currencyEventUpCaster)
-//                .build();
-//    }
-
 }

@@ -7,7 +7,7 @@ import org.axonframework.serialization.upcasting.event.SingleEventUpcaster;
 
 public class CurrencyEventUpCaster extends SingleEventUpcaster {
     private static SimpleSerializedType targetType =
-            new SimpleSerializedType(BankTransactionCreatedEvent.class.getTypeName(), "1.0");
+            new SimpleSerializedType(BankTransactionCreatedEvent.class.getTypeName(), null);
     @Override
     protected boolean canUpcast(IntermediateEventRepresentation intermediateEventRepresentation) {
         return intermediateEventRepresentation.getType().equals(targetType);
@@ -16,7 +16,7 @@ public class CurrencyEventUpCaster extends SingleEventUpcaster {
     @Override
     protected IntermediateEventRepresentation doUpcast(IntermediateEventRepresentation intermediateEventRepresentation) {
         return intermediateEventRepresentation.upcastPayload(
-                new SimpleSerializedType(targetType.getName(), "2.0"),
+                new SimpleSerializedType(targetType.getName(), "1.0"),
                 org.dom4j.Document.class,
                 document -> {
                     document.getRootElement().elements().get(1)
