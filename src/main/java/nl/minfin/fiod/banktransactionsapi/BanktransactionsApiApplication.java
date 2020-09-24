@@ -1,6 +1,7 @@
 package nl.minfin.fiod.banktransactionsapi;
 
 import nl.minfin.fiod.banktransactionsapi.upcasters.CurrencyEventUpCaster;
+import nl.minfin.fiod.banktransactionsapi.upcasters.TransactionDateTimeEventUpCaster;
 import org.axonframework.common.jpa.EntityManagerProvider;
 import org.axonframework.common.transaction.TransactionManager;
 import org.axonframework.eventsourcing.eventstore.inmemory.InMemoryEventStorageEngine;
@@ -66,5 +67,10 @@ public class BanktransactionsApiApplication {
     @Bean
     public SingleEventUpcaster currencyEventUpCaster() {
         return new CurrencyEventUpCaster();
+    }
+
+    @Bean
+    public SingleEventUpcaster transactionDateTimeEventUpCaster() {
+        return new TransactionDateTimeEventUpCaster();
     }
 }

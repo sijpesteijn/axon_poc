@@ -1,11 +1,14 @@
 package nl.minfin.fiod.banktransactionsapi.domain;
 
+import java.time.Instant;
+
 public class BankTransactionDto {
     private String bankTransactionId;
     private String fromAccount;
     private String fromAccountHolder;
     private String toAccount;
     private String toAccountHolder;
+    private Instant transactionDateTime;
     private String currency;
 
     public BankTransactionDto() {
@@ -57,5 +60,13 @@ public class BankTransactionDto {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public Instant getTransactionDateTime() {
+        return transactionDateTime;
+    }
+
+    public void setTransactionDateTime(Instant transactionDateTime) {
+        this.transactionDateTime = transactionDateTime;
     }
 }

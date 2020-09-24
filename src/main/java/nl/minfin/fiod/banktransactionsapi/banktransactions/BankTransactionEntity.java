@@ -23,6 +23,8 @@ public class BankTransactionEntity {
     private String fromAccountHolder;
     @Field(type = FieldType.Text)
     private String currency;
+    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
+    private Instant transactionDateTime;
     @Field(type = FieldType.Text)
     private ParseStatus parseStatus;
     @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
@@ -34,13 +36,14 @@ public class BankTransactionEntity {
     }
 
     public BankTransactionEntity(String bankTransactionId, String toAccount, String toAccountHolder, String fromAccount,
-                                 String fromAccountHolder, String currency, ParseStatus parseStatus, Instant createDate, Instant lastUpdateDate) {
+                                 String fromAccountHolder, String currency, Instant transactionDateTime,  ParseStatus parseStatus, Instant createDate, Instant lastUpdateDate) {
         this.bankTransactionId = bankTransactionId;
         this.toAccount = toAccount;
         this.toAccountHolder = toAccountHolder;
         this.fromAccount = fromAccount;
         this.fromAccountHolder = fromAccountHolder;
         this.currency = currency;
+        this.transactionDateTime = transactionDateTime;
         this.parseStatus = parseStatus;
         this.createDate = createDate;
         this.lastUpdateDate = lastUpdateDate;
@@ -100,6 +103,14 @@ public class BankTransactionEntity {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public void setTransactionDateTime(Instant transactionDateTime) {
+        this.transactionDateTime = transactionDateTime;
+    }
+
+    public Instant getTransactionDateTime() {
+        return transactionDateTime;
     }
 
     public void setCreateDate(Instant createDate) {

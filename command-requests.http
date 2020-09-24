@@ -10,7 +10,8 @@ Content-Type: application/json
   "fromAccountHolder": "Jan Jansen",
   "toAccount": "NL50ABNA01245939",
   "toAccountHolder": "Pietje Puk",
-  "currency": "EUR"
+  "currency": "EUR",
+  "transactionDateTime" : "2020-08-01T11:43:06.908Z"
 }
 ###
 

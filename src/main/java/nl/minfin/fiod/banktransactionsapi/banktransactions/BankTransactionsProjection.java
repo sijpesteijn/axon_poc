@@ -40,7 +40,7 @@ public class BankTransactionsProjection {
         BankTransactionEntity bankTransactionEntity = new BankTransactionEntity(event.getBankTransactionId(),
                 event.getBankTransaction().getToAccount(), event.getBankTransaction().getToAccountHolder(),
                 event.getBankTransaction().getFromAccount(), event.getBankTransaction().getFromAccountHolder(),
-                event.getBankTransaction().getCurrency(), ParseStatus.NEW, timestamp, timestamp);
+                event.getBankTransaction().getCurrency(), event.getBankTransaction().getTransactionDateTime(), ParseStatus.NEW, timestamp, timestamp);
         bankTransactionRepository.save(bankTransactionEntity);
         this.updateEmitter.emit(BankTransactionQuery.class, query -> query.getBankTransactionId().equals(bankTransactionEntity.getBankTransactionId()), bankTransactionEntity);
         this.updateEmitter.emit(AllBankTransactionsQuery.class, query -> true, bankTransactionEntity);
