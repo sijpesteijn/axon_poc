@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: axon_poc
+  description: An Axon proof of concept
+  tags:
+    - java
+spec:
+  type: service
+  lifecycle: production
+  owner: Gijs
